@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Better phpMyAdmin</title>
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🐬</text></svg>" />
+  <link rel="stylesheet" href="/vendor/fontawesome/css/all.min.css" />
   <link rel="stylesheet" href="/css/style.css" />
 </head>
 <body>
@@ -13,7 +14,7 @@
   <div id="login" class="login-screen">
     <form id="loginForm" class="login-card" autocomplete="off">
       <div class="login-brand">
-        <span class="login-logo">🐬</span>
+        <span class="login-logo"><i class="fa-solid fa-database"></i></span>
         <h1>Better phpMyAdmin</h1>
         <p>Connect to your MySQL / MariaDB server</p>
       </div>
@@ -41,13 +42,13 @@
   <div id="app" class="app hidden">
     <header class="topbar">
       <div class="topbar-left">
-        <span class="brand"><span class="brand-logo">🐬</span> Better phpMyAdmin</span>
+        <span class="brand"><span class="brand-logo"><i class="fa-solid fa-database"></i></span> Better phpMyAdmin</span>
       </div>
       <div class="topbar-center">
         <span id="connInfo" class="conn-info"></span>
       </div>
       <div class="topbar-right">
-        <button class="icon-btn" id="themeToggle" title="Toggle theme">🌓</button>
+        <button class="icon-btn" id="themeToggle" title="Toggle theme"><i class="fa-solid fa-circle-half-stroke"></i></button>
         <button class="btn btn-ghost" id="logoutBtn">Log out</button>
       </div>
     </header>
@@ -57,8 +58,8 @@
       <aside class="sidebar">
         <div class="sidebar-tools">
           <input type="search" id="dbFilter" placeholder="Filter databases / tables…" />
-          <button class="icon-btn" id="refreshDbs" title="Refresh">⟳</button>
-          <button class="icon-btn" id="newDbBtn" title="New database">＋</button>
+          <button class="icon-btn" id="refreshDbs" title="Refresh"><i class="fa-solid fa-rotate"></i></button>
+          <button class="icon-btn" id="newDbBtn" title="New database"><i class="fa-solid fa-plus"></i></button>
         </div>
         <nav id="dbTree" class="db-tree"></nav>
       </aside>
@@ -66,7 +67,7 @@
       <!-- Main -->
       <main class="main" id="main">
         <div class="empty-state" id="welcome">
-          <span class="empty-logo">🐬</span>
+          <span class="empty-logo"><i class="fa-solid fa-database"></i></span>
           <h2>Welcome</h2>
           <p>Select a database or table on the left, or open the SQL console.</p>
           <div id="serverStats" class="server-stats"></div>

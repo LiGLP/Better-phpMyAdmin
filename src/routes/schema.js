@@ -30,7 +30,7 @@ module.exports = function schemaRoutes() {
     const { db } = req.params;
     const [rows] = await req.pool.query(
       `SELECT TABLE_NAME AS name, TABLE_TYPE AS type, ENGINE AS engine,
-              TABLE_ROWS AS rows, DATA_LENGTH AS dataLength, INDEX_LENGTH AS indexLength,
+              TABLE_ROWS AS \`rows\`, DATA_LENGTH AS dataLength, INDEX_LENGTH AS indexLength,
               TABLE_COMMENT AS comment
          FROM information_schema.TABLES
         WHERE TABLE_SCHEMA = ?
@@ -60,7 +60,7 @@ module.exports = function schemaRoutes() {
       [db, table]
     );
     const [indexes] = await req.pool.query(
-      `SELECT INDEX_NAME AS name, NON_UNIQUE AS nonUnique, COLUMN_NAME AS column,
+      `SELECT INDEX_NAME AS name, NON_UNIQUE AS nonUnique, COLUMN_NAME AS \`column\`,
               SEQ_IN_INDEX AS seq, INDEX_TYPE AS type
          FROM information_schema.STATISTICS
         WHERE TABLE_SCHEMA = ? AND TABLE_NAME = ?

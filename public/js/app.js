@@ -169,7 +169,7 @@ function renderTree() {
     const shown = open ? tables : [];
     dbEl.innerHTML = `
       <div class="tree-db-head ${state.sel.db === db.name && !state.sel.table ? 'active' : ''}" data-db="${esc(db.name)}">
-        <span class="tree-caret">▶</span>
+        <span class="tree-caret"><i class="fa-solid fa-chevron-right"></i></span>
         <span class="tree-db-name" title="${esc(db.name)}">${esc(db.name)}</span>
         <span class="tree-badge">${db.tableCount}</span>
       </div>
@@ -177,7 +177,7 @@ function renderTree() {
         ${(filter ? matchTables : shown).map(t => `
           <div class="tree-table ${t.type} ${state.sel.db === db.name && state.sel.table === t.name ? 'active' : ''}"
                data-db="${esc(db.name)}" data-table="${esc(t.name)}">
-            <span class="ico">${t.type === 'view' ? '👁' : '▦'}</span>
+            <span class="ico">${t.type === 'view' ? '<i class="fa-solid fa-eye"></i>' : '<i class="fa-solid fa-table"></i>'}</span>
             <span title="${esc(t.name)}">${esc(t.name)}</span>
           </div>`).join('')}
       </div>`;
@@ -241,10 +241,10 @@ function renderWelcome() {
   const userDbs = state.databases.filter(d => !d.system);
   $('#main').innerHTML = `
     <div class="panel-head">
-      <div class="panel-title">🐬 Server overview</div>
+      <div class="panel-title"><i class="fa-solid fa-server"></i> Server overview</div>
       <div class="panel-actions">
-        <button class="btn" id="wNewDb">＋ New database</button>
-        <button class="btn btn-primary" id="wSql">SQL console</button>
+        <button class="btn" id="wNewDb"><i class="fa-solid fa-plus"></i> New database</button>
+        <button class="btn btn-primary" id="wSql"><i class="fa-solid fa-bolt"></i> SQL console</button>
       </div>
     </div>
     <div class="panel-body">
@@ -257,7 +257,7 @@ function renderWelcome() {
       <div class="cards">
         ${userDbs.map(d => `
           <div class="card" data-db="${esc(d.name)}">
-            <h3>🗄 ${esc(d.name)}</h3>
+            <h3><i class="fa-solid fa-database"></i> ${esc(d.name)}</h3>
             <div class="meta">${d.tableCount} table${d.tableCount === 1 ? '' : 's'}</div>
           </div>`).join('') || '<p class="muted">No user databases yet. Create one to get started.</p>'}
       </div>
@@ -274,13 +274,13 @@ async function renderDatabaseView(db) {
   const main = $('#main');
   main.innerHTML = `
     <div class="panel-head">
-      <div class="panel-title">🗄 <span>${esc(db)}</span></div>
+      <div class="panel-title"><i class="fa-solid fa-database"></i> <span>${esc(db)}</span></div>
       <div class="panel-actions">
-        <button class="btn" id="dNewTable">＋ New table</button>
-        <button class="btn" id="dSql">SQL</button>
-        <button class="btn" id="dExport">⬇ Export</button>
-        <button class="btn" id="dImport">⬆ Import</button>
-        <button class="btn btn-danger" id="dDrop">Drop database</button>
+        <button class="btn" id="dNewTable"><i class="fa-solid fa-plus"></i> New table</button>
+        <button class="btn" id="dSql"><i class="fa-solid fa-bolt"></i> SQL</button>
+        <button class="btn" id="dExport"><i class="fa-solid fa-download"></i> Export</button>
+        <button class="btn" id="dImport"><i class="fa-solid fa-upload"></i> Import</button>
+        <button class="btn btn-danger" id="dDrop"><i class="fa-solid fa-trash"></i> Drop database</button>
       </div>
     </div>
     <div class="panel-body"><div class="loading"><span class="spinner"></span> Loading tables…</div></div>`;
@@ -316,7 +316,7 @@ async function renderDatabaseView(db) {
           <tbody>
             ${tables.map(t => `
               <tr data-table="${esc(t.name)}" data-type="${t.type}">
-                <td class="mono"><a href="#" class="tbl-link">${t.type === 'view' ? '👁' : '▦'} ${esc(t.name)}</a></td>
+                <td class="mono"><a href="#" class="tbl-link">${t.type === 'view' ? '<i class="fa-solid fa-eye"></i>' : '<i class="fa-solid fa-table"></i>'} ${esc(t.name)}</a></td>
                 <td>${t.type}</td>
                 <td>${esc(t.engine || '–')}</td>
                 <td class="num">${t.rows == null ? '–' : fmtNum(t.rows)}</td>
@@ -370,10 +370,10 @@ function tableHead() {
   ];
   return `
     <div class="panel-head">
-      <div class="panel-title">▦ <span class="crumb">${esc(db)} ›</span> ${esc(table)}</div>
+      <div class="panel-title"><i class="fa-solid fa-table"></i> <span class="crumb">${esc(db)} ›</span> ${esc(table)}</div>
       <div class="panel-actions">
-        <button class="btn btn-sm" id="thRefresh">⟳ Refresh</button>
-        <button class="btn btn-sm btn-danger" id="thDrop">Drop</button>
+        <button class="btn btn-sm" id="thRefresh"><i class="fa-solid fa-rotate"></i> Refresh</button>
+        <button class="btn btn-sm btn-danger" id="thDrop"><i class="fa-solid fa-trash"></i> Drop</button>
       </div>
     </div>
     <div class="tabs">
@@ -422,7 +422,7 @@ async function renderBrowse() {
     <div class="sql-bar" style="margin:0 0 14px;">
       <input type="search" id="bSearch" placeholder="Search all columns…" value="${esc(b.search)}" style="max-width:280px;">
       <button class="btn btn-sm" id="bSearchBtn">Search</button>
-      <button class="btn btn-sm btn-primary" id="bInsert">＋ Insert row</button>
+      <button class="btn btn-sm btn-primary" id="bInsert"><i class="fa-solid fa-plus"></i> Insert row</button>
       <span class="spacer" style="flex:1"></span>
       <span class="muted">${fmtNum(data.total)} row${data.total === 1 ? '' : 's'}</span>
     </div>
@@ -437,8 +437,8 @@ async function renderBrowse() {
           ${data.rows.map((row, i) => `
             <tr data-i="${i}">
               <td class="row-actions">
-                <button class="btn btn-sm" data-act="edit" title="Edit">✎</button>
-                <button class="btn btn-sm btn-danger" data-act="del" title="Delete">✕</button>
+                <button class="btn btn-sm" data-act="edit" title="Edit"><i class="fa-solid fa-pen-to-square"></i></button>
+                <button class="btn btn-sm btn-danger" data-act="del" title="Delete"><i class="fa-solid fa-trash"></i></button>
               </td>
               ${data.columns.map(c => cellHtml(row[c])).join('')}
             </tr>`).join('')}
@@ -507,7 +507,7 @@ async function openRowEditor(mode, row) {
     const auto = /auto_increment/i.test(c.extra || '');
     return `
       <label>
-        <span>${esc(c.name)} <span class="muted">${esc(c.type)}${c.key === 'PRI' ? ' 🔑' : ''}${auto ? ' · auto' : ''}</span></span>
+        <span>${esc(c.name)} <span class="muted">${esc(c.type)}${c.key === 'PRI' ? ' <i class="fa-solid fa-key"></i>' : ''}${auto ? ' · auto' : ''}</span></span>
         <div class="inline">
           <textarea rows="1" data-col="${esc(c.name)}" ${isNull ? 'disabled' : ''} style="font-family:var(--mono);min-height:36px;">${esc(isNull ? '' : val)}</textarea>
           ${c.nullable ? `<label class="checkbox-row" style="margin:0;white-space:nowrap;"><input type="checkbox" data-null="${esc(c.name)}" ${isNull ? 'checked' : ''}> NULL</label>` : ''}
@@ -635,7 +635,7 @@ function sqlConsole(db, presetSql) {
   return `
     <textarea class="sql-editor" id="sqlBox" placeholder="SELECT * FROM ...">${esc(presetSql || state.sqlScratch || '')}</textarea>
     <div class="sql-bar">
-      <button class="btn btn-primary" id="sqlRun">▶ Run <span class="muted">(Ctrl+Enter)</span></button>
+      <button class="btn btn-primary" id="sqlRun"><i class="fa-solid fa-play"></i> Run <span class="muted">(Ctrl+Enter)</span></button>
       ${db ? `<span class="sql-hint">Running on <b>${esc(db)}</b></span>` : '<span class="sql-hint">No database selected — use fully-qualified names or <code>USE db;</code></span>'}
       <span class="spacer" style="flex:1"></span>
       <button class="btn btn-sm" id="sqlClear">Clear</button>
@@ -705,7 +705,7 @@ function renderGlobalSql(db) {
   renderTree();
   $('#main').innerHTML = `
     <div class="panel-head">
-      <div class="panel-title">⚡ SQL console ${db ? `<span class="crumb">· ${esc(db)}</span>` : ''}</div>
+      <div class="panel-title"><i class="fa-solid fa-bolt"></i> SQL console ${db ? `<span class="crumb">· ${esc(db)}</span>` : ''}</div>
     </div>
     <div class="panel-body">${sqlConsole(db, '')}</div>`;
   wireSql(db);
@@ -722,15 +722,15 @@ function renderExportView(db, table) {
       <div class="checkbox-row"><input type="checkbox" id="exData" checked> <label for="exData">Include data (INSERT statements)</label></div>
       <div class="checkbox-row"><input type="checkbox" id="exDrop"> <label for="exDrop">Add DROP TABLE before each CREATE</label></div>
       <div class="inline">
-        <button class="btn btn-primary" id="exGo">⬇ Download .sql</button>
-        ${table ? '<button class="btn" id="exCsv">⬇ Download .csv</button>' : ''}
+        <button class="btn btn-primary" id="exGo"><i class="fa-solid fa-download"></i> Download .sql</button>
+        ${table ? '<button class="btn" id="exCsv"><i class="fa-solid fa-download"></i> Download .csv</button>' : ''}
       </div>
     </div>`;
   if (table) { main.innerHTML = inner; }
   else {
     main.innerHTML = `
-      <div class="panel-head"><div class="panel-title">⬇ Export <span class="crumb">· ${esc(db)}</span></div>
-        <div class="panel-actions"><button class="btn" id="exBack">← Back</button></div></div>
+      <div class="panel-head"><div class="panel-title"><i class="fa-solid fa-download"></i> Export <span class="crumb">· ${esc(db)}</span></div>
+        <div class="panel-actions"><button class="btn" id="exBack"><i class="fa-solid fa-arrow-left"></i> Back</button></div></div>
       <div class="panel-body">${inner}</div>`;
     $('#exBack').onclick = () => renderDatabaseView(db);
   }
@@ -745,13 +745,13 @@ function renderExportView(db, table) {
 
 function renderImportView(db) {
   $('#main').innerHTML = `
-    <div class="panel-head"><div class="panel-title">⬆ Import <span class="crumb">· ${esc(db)}</span></div>
-      <div class="panel-actions"><button class="btn" id="imBack">← Back</button></div></div>
+    <div class="panel-head"><div class="panel-title"><i class="fa-solid fa-upload"></i> Import <span class="crumb">· ${esc(db)}</span></div>
+      <div class="panel-actions"><button class="btn" id="imBack"><i class="fa-solid fa-arrow-left"></i> Back</button></div></div>
     <div class="panel-body">
       <div class="form-grid">
         <p class="help-text">Upload a <b>.sql</b> file to execute against <b>${esc(db)}</b>. Max ${state.cfg.maxImportSizeMB} MB.</p>
         <label>SQL file <input type="file" id="imFile" accept=".sql,text/plain"></label>
-        <div class="inline"><button class="btn btn-primary" id="imGo">⬆ Import</button></div>
+        <div class="inline"><button class="btn btn-primary" id="imGo"><i class="fa-solid fa-upload"></i> Import</button></div>
         <div id="imResult"></div>
       </div>
     </div>`;
@@ -816,7 +816,7 @@ function newTableDialog(db) {
       <td style="text-align:center"><input type="checkbox" data-f="null"></td>
       <td style="text-align:center"><input type="checkbox" data-f="pk"></td>
       <td style="text-align:center"><input type="checkbox" data-f="ai"></td>
-      <td><button class="btn btn-sm btn-danger" data-f="rm">✕</button></td>
+      <td><button class="btn btn-sm btn-danger" data-f="rm"><i class="fa-solid fa-xmark"></i></button></td>
     </tr>`;
   };
   openModal(`
@@ -827,7 +827,7 @@ function newTableDialog(db) {
         <th>Name</th><th>Type</th><th>Null</th><th>PK</th><th>A_I</th><th></th>
       </tr></thead><tbody id="ntCols">${colRow()}${colRow()}</tbody></table>
     </div>
-    <button class="btn btn-sm" id="ntAdd">＋ Add column</button>
+    <button class="btn btn-sm" id="ntAdd"><i class="fa-solid fa-plus"></i> Add column</button>
     <div class="modal-actions">
       <button class="btn btn-ghost" id="ntCancel">Cancel</button>
       <button class="btn btn-primary" id="ntOk">Create table</button>
