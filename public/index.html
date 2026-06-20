@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Better phpMyAdmin</title>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🐬</text></svg>" />
+  <link rel="stylesheet" href="/css/style.css" />
+</head>
+<body>
+
+  <!-- ============ LOGIN ============ -->
+  <div id="login" class="login-screen">
+    <form id="loginForm" class="login-card" autocomplete="off">
+      <div class="login-brand">
+        <span class="login-logo">🐬</span>
+        <h1>Better phpMyAdmin</h1>
+        <p>Connect to your MySQL / MariaDB server</p>
+      </div>
+      <label>Host
+        <input name="host" id="lHost" placeholder="127.0.0.1" />
+      </label>
+      <div class="login-row">
+        <label>Port
+          <input name="port" id="lPort" placeholder="3306" />
+        </label>
+        <label>Username
+          <input name="user" id="lUser" placeholder="root" />
+        </label>
+      </div>
+      <label>Password
+        <input name="password" id="lPass" type="password" placeholder="(leave empty for XAMPP default)" />
+      </label>
+      <button type="submit" class="btn btn-primary btn-block" id="loginBtn">Connect</button>
+      <div class="login-error" id="loginError"></div>
+    </form>
+    <p class="login-foot">Better phpMyAdmin · direct MySQL/MariaDB client · port 8009</p>
+  </div>
+
+  <!-- ============ APP ============ -->
+  <div id="app" class="app hidden">
+    <header class="topbar">
+      <div class="topbar-left">
+        <span class="brand"><span class="brand-logo">🐬</span> Better phpMyAdmin</span>
+      </div>
+      <div class="topbar-center">
+        <span id="connInfo" class="conn-info"></span>
+      </div>
+      <div class="topbar-right">
+        <button class="icon-btn" id="themeToggle" title="Toggle theme">🌓</button>
+        <button class="btn btn-ghost" id="logoutBtn">Log out</button>
+      </div>
+    </header>
+
+    <div class="layout">
+      <!-- Sidebar -->
+      <aside class="sidebar">
+        <div class="sidebar-tools">
+          <input type="search" id="dbFilter" placeholder="Filter databases / tables…" />
+          <button class="icon-btn" id="refreshDbs" title="Refresh">⟳</button>
+          <button class="icon-btn" id="newDbBtn" title="New database">＋</button>
+        </div>
+        <nav id="dbTree" class="db-tree"></nav>
+      </aside>
+
+      <!-- Main -->
+      <main class="main" id="main">
+        <div class="empty-state" id="welcome">
+          <span class="empty-logo">🐬</span>
+          <h2>Welcome</h2>
+          <p>Select a database or table on the left, or open the SQL console.</p>
+          <div id="serverStats" class="server-stats"></div>
+        </div>
+      </main>
+    </div>
+
+    <div id="toast" class="toast hidden"></div>
+
+    <!-- Generic modal -->
+    <div id="modalOverlay" class="modal-overlay hidden">
+      <div class="modal" id="modal"></div>
+    </div>
+  </div>
+
+  <script src="/js/app.js"></script>
+</body>
+</html>

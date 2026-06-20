@@ -1,0 +1,29 @@
+{
+  "name": "better-phpmyadmin",
+  "version": "1.0.0",
+  "description": "A modern, self-hosted web UI that talks directly to MySQL/MariaDB. A full replacement for phpMyAdmin.",
+  "type": "commonjs",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "engines": {
+    "node": ">=18"
+  },
+  "keywords": [
+    "mysql",
+    "mariadb",
+    "phpmyadmin",
+    "database",
+    "admin",
+    "sql"
+  ],
+  "author": "LiGLP",
+  "license": "MIT",
+  "dependencies": {
+    "express": "^4.19.2",
+    "express-session": "^1.18.0",
+    "multer": "^2.0.1",
+    "mysql2": "^3.11.0"
+  }
+}

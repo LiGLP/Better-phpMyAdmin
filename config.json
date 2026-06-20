@@ -1,0 +1,19 @@
+{
+  "server": {
+    "port": 8009,
+    "host": "0.0.0.0",
+    "sessionSecret": "change-me-better-phpmyadmin-secret",
+    "sessionTimeoutMinutes": 120
+  },
+  "defaults": {
+    "host": "127.0.0.1",
+    "port": 3306,
+    "user": "root",
+    "password": ""
+  },
+  "limits": {
+    "rowsPerPage": 50,
+    "maxQueryRows": 5000,
+    "maxImportSizeMB": 64
+  }
+}
